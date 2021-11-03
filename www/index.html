@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+          <meta name="format-detection" content="telephone=no"> -->
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+  <link rel="manifest" href="manifest.json" />
+  <meta name="color-scheme" content="light dark">
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+  <link rel="stylesheet" href="css/index.css">
+  <script type="text/javascript">
+    window.addEventListener("load", () => {
+      if ("cordova" in window) {
+      } else {
+        if ("serviceWorker" in navigator) {
+          console.log(navigator.serviceWorker);
+          navigator.serviceWorker
+            .register("./service-worker.js", { scope: "./" })
+            .then(function (reg) {
+            });
+        }
+        /* 
+          var OneSignal = window.OneSignal || [];
+        var initConfig = {
+          appId: "0e7468fd-cf9c-4079-8af1-99e3fc4069de",
+          notifyButton: {
+            enable: true,
+          },
+        };
+        OneSignal.push(function () {
+          OneSignal.SERVICE_WORKER_PARAM = { scope: "push/onesignal/" };
+          OneSignal.SERVICE_WORKER_PATH =
+            "push/onesignal/OneSignalSDKWorker.js";
+          OneSignal.SERVICE_WORKER_UPDATER_PATH =
+            "push/onesignal/OneSignalSDKUpdaterWorker.js";
+          OneSignal.init(initConfig);
+        });*/
+      }
+    });
+
+  </script>
+  <title>Hello World</title>
+</head>
+
+<body>
+  <div class="app" id="app">
+    <div id="accueil" v-if="current=='home'">
+      <div v-on:click="setCurrent('add')">ajout d'une liste</div>
+      <div v-for="top in _.keys(tops)" id="list" :key="top.name">
+        <div v-on:click="setCurrent('detail',top,true)">{{top}}</div>
+      </div>
+    </div>
+    <div id="crée" v-if="current=='add'">
+      <div v-on:click="setCurrent('home')">Retour a l'accueil</div>
+      <form action="">
+
+        <div>{{Object.keys(tops)}}</div>
+        <div v-if="isSavedTopName==true">{{ tops[topName] }}</div>
+        <div v-if="isSavedTopName==false">
+          <label for="topName">nom de la liste</label>
+          <input type="text" v-model="topName" name="topName" id="topName" />
+          <div @click="validateTopName">valider</div>
+        </div>
+        <div v-if="isSavedTopName==true">
+          <h3>Ajout d'un element</h3>
+          <label for="itemName">nom de lelement</label>
+          <input type="text" v-model="item.name" name="itemName" id="itemName" />
+          <div>
+            <label for="position">position</label>
+            <input type="number" v-model="item.position" name="position" id="position" />
+          </div>
+          <div @click="addItem">ajouter</div>
+      </form>
+      <div id="listElement" v-if="isSavedTopName==true" v-for="item in tops[topName]" :key="item.name">
+        <h3>
+          <span>{{item.position}}</span>
+          <span>{{item.name }}</span>
+        </h3>
+
+      </div>
+    </div>
+    <div id="details" v-if="current=='detail'">
+      <div v-on:click="setCurrent('home')">Retour a l'accueil</div>
+      <div @click="setCurrent('add')">ajout delement</div>
+      <div>welcome in detail of {{topName}}</div>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="js/index.js"></script>
+
+  <script src="cordova.js"></script>
+</body>
+
+</html>
