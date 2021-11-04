@@ -75,10 +75,14 @@
     </div>
     <div id="details" v-if="current=='detail'">
       <div v-on:click="setCurrent('home')">Retour a l'accueil</div>
-      <div @click="setCurrent('add')">ajout delement</div>
-      <div>welcome in detail of {{topName}}</div>
+      <h2> {{topName}}</h2>
+      <div id="listElement">
+        <h3 v-for="item in tops[topName]" :key="item.name">
+          <span>{{item.position}}</span>
+          <span>{{item.name }}</span>
+        </h3>
+      </div>
     </div>
-
   </div>
   </div>
 

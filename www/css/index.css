@@ -130,19 +130,23 @@ input {
 }
 
 .btn {
-   display: inline-block;
-   padding: 0.3em 1.2em;
-   margin: 0 0.3em 0.3em 0;
-   border-radius: 2em;
-   box-sizing: border-box;
-   text-decoration: none;
-   font-family: "Roboto", sans-serif;
-   font-weight: 300;
-   color: #ffffff;
-   background-color: #4eb5f1;
-   text-align: center;
-   transition: all 0.2s;
+  padding: 0.3em 1.2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  width: 16vw;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 811;
+  margin: 22px auto 0 auto;
+  transition: all 0.2s;
 }
 .btn:hover {
-   background-color: #4095c6;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  border-radius: 0;
 }
