@@ -1,5 +1,5 @@
 const ORIGIN_URL = `${location.protocol}//${location.host}`;
-const CACHE_NAME = "v1.1.3";
+const CACHE_NAME = "v1.1.5";
 const OFFLINE_URL = "offline.html";
 const CACHED_FILES = [
   OFFLINE_URL,
@@ -75,7 +75,6 @@ const waitUntilInstallationPromise = () =>
   });
 
 const installSW = (e) => {
-  console.log(e);
   e.waitUntil(waitUntilInstallationPromise());
   self.skipWaiting();
 };

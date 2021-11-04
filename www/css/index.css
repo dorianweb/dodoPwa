@@ -40,8 +40,8 @@ body {
 @media screen and (min-aspect-ratio: 1/1) and (min-width: 400px) {
   .app {
     background-position: left center;
-    padding: 75px 0px 75px 170px; 
-    margin: -90px 0px 0px -198px; 
+    padding: 75px 0px 75px 170px;
+    margin: -90px 0px 0px -198px;
   }
 }
 
@@ -100,4 +100,53 @@ h1 {
   body {
     background-image: linear-gradient(to bottom, #585858 0%, #1b1b1b 51%);
   }
+}
+
+.list-item {
+  width: 70vw;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+.container-topname-creation {
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+}
+
+label {
+  color: white;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 80vw;
+  height: 20px;
+}
+
+.btn {
+  padding: 0.3em 1.2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  width: 16vw;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 811;
+  margin: 22px auto 0 auto;
+  transition: all 0.2s;
+}
+.btn:hover {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  border-radius: 0;
 }

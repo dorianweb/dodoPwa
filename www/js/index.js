@@ -19,7 +19,6 @@ window.vue = new Vue({
   methods: {
     setCurrent: function (curr, selectedTopName = "", needReset = true) {
       this.current = curr;
-      console.log(arguments);
       if (needReset) {
         this.isSavedTopName = false;
         this.topName = curr == "detail" ? selectedTopName : "none";
@@ -51,7 +50,6 @@ window.vue = new Vue({
         sortedItems = [...sortedItems, clonedItem];
 
         sortedItems = _.sortBy(sortedItems, ["position"]);
-        console.log(sortedItems);
         //met a jour le top
         this.tops = {
           ...this.tops,
@@ -59,10 +57,8 @@ window.vue = new Vue({
         };
         this.item.position = sortedItems.length + 1;
         this.item.name = "";
-        if (isPluginAvailable) {
-          navigator.vibrate([1000]);
-        } else {
-          console.log("plugin not available");
+        if (this.isPluginAvailable) {
+          navigator.vibrate(500);
         }
       }
     },
@@ -74,34 +70,42 @@ window.vue = new Vue({
           [this.topName]: [],
         };
         this.isSavedTopName = true;
-        if (isPluginAvailable) {
-          navigator.vibrate([1000, 1000]);
-          if (this.tops.length == 1)
-            navigator.notification.alert(
-              "Felicitation vous avez crée votre premier top",
-              () => {}
-            );
+        if (this.isPluginAvailable) {
+          navigator.vibrate([500, 300, 500]);
         }
       }
     },
   },
   watch: {
     tops: function () {
-      console.log("tops as changed");
       localStorage.setItem("tops", JSON.stringify(this.tops));
+    },
+    current: function (neo, old) {
+      if (neo == "home" && old == "add") {
+        if (this.isPluginAvailable) {
+          navigator.notification.alert("top ajouter avec succes", () => {});
+        }
+      }
     },
   },
 });
 
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
   // Cordova is now initialized. Have fun!
-  window.vue.camera = navigator.camera;
-  window.vue.camera = navigator.camera;
-  window.vue.isPluginAvailable = true;
+  StatusBar.overlaysWebView(true);
+  StatusBar.backgroundColorByHexString("#EE4466");
 
+  if (
+    typeof navigator.vibrate !== "unedefined" &&
+    typeof navigator.notification !== "unedefined"
+  ) {
+    //window.vue.navigator = navigator;
+    window.vue.isPluginAvailable = true;
+    //navigator.notification.vibrate(1000);
+  }
   console.log("Running cordova-" + cordova.platformId + "@" + cordova.version);
 }
+document.addEventListener("deviceready", onDeviceReady, false);
