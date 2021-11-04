@@ -9,7 +9,13 @@
 </head>
 
 <body>
-    hello World
+    <button onclick="handleClick('cheh')"> Reload si tes cap </button>
 </body>
+<script type="text/javascript">
+    const handleClick = (str) => {
+        alert(str);
+        window.location = `${window.location.orgin}/index.html`;
+    }
+</script>
 
 </html>
